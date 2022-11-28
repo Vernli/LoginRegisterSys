@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "../header/menu.hpp"
 #include "../header/user.hpp"
+#include "../header/checkInput.hpp"
 
 using namespace std;
 
@@ -21,12 +22,17 @@ void SetCurorPosition(int row, int col) {
 }
 
 int main() {
-	User* user = new User;
 	system("cls");
+
+	
 	Menu* mainMenu = new Menu(3, { "1. Login", "2. Register", "0. Exit" });
-	Menu* loginMenu = new Menu(2, { "Login:", "Password:" }, true);
-	Menu* regiMenu = new Menu(7, { "Name:", "Last name:", "Age:", "E-mail", "Login:", "Password:", "Repeat password:" }, true);
-	bool caseComplete = false;
+	Menu* loginMenu = new Menu(2, { "Login:", "Password:" });
+	Menu* regiMenu = new Menu(7, { "Name:", "Last name:", "Age:", "E-mail", "Login:", "Password:", "Repeat password:" });
+
+	User* user = new User;
+
+	ChInput* checker = new ChInput;
+	bool caseResolved = false;
 
 	do {
 		mainMenu->showContent();
@@ -38,34 +44,37 @@ int main() {
 
 			loginMenu->showContent();
 			SetCurorPosition(loginMenu->getMenuElementLength(0), 0);
-			loginMenu->setToVerify();	// Login
+			checker->insertToVerify("Login");
 			SetCurorPosition(loginMenu->getMenuElementLength(1), 1);
-			loginMenu->setToVerify();	// Password
+			checker->insertToVerify("Password");
 			//check Correctness
-
-			caseComplete = true;
+			checker->CheckInput("Login");
+			// Here
+			checker->CheckInput("Password");
+			caseResolved = true;
 			break;
+
 		case 2:
 			system("cls");
 			regiMenu->showContent();
 
 			SetCurorPosition(regiMenu->getMenuElementLength(0), 0);
-			regiMenu->setToVerify();	// Name
+
 			SetCurorPosition(regiMenu->getMenuElementLength(1), 1);
-			regiMenu->setToVerify();	// Last name
+			//regiMenu->setToVerify();	// Last name
 			SetCurorPosition(regiMenu->getMenuElementLength(2), 2);
-			regiMenu->setToVerify();	// Age
+			//regiMenu->setToVerify();	// Age
 			SetCurorPosition(regiMenu->getMenuElementLength(3), 3);
-			regiMenu->setToVerify();	// E-mail
+			//regiMenu->setToVerify();	// E-mail
 			SetCurorPosition(regiMenu->getMenuElementLength(4), 4);
-			regiMenu->setToVerify();	// Login
+			//regiMenu->setToVerify();	// Login
 			SetCurorPosition(regiMenu->getMenuElementLength(5), 5);
-			regiMenu->setToVerify();	// Password
+			//regiMenu->setToVerify();	// Password
 			SetCurorPosition(regiMenu->getMenuElementLength(6), 6);
-			regiMenu->setToVerify();	// Password check
+			//regiMenu->setToVerify();	// Password check
 			//check Correctness
 
-			caseComplete = true;
+			caseResolved = true;
 			break;
 		case 3:
 			
@@ -76,5 +85,5 @@ int main() {
 			MessageBox(0, L"Inserted value is incorrect", L"Invalid", MB_OK);
 			break;
 		}
-	} while (!caseComplete);
+	} while (!caseResolved);
 }

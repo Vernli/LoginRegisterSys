@@ -127,19 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\sqllite\shell.c" />
+    <ClCompile Include="..\..\..\sqllite\sqlite3.c" />
+    <ClCompile Include="src\checkInput.cpp" />
     <ClCompile Include="src\database.cpp" />
     <ClCompile Include="src\person.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\user.cpp" />
-    <ClCompile Include="src\verifydata.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\checkInput.hpp" />
     <ClInclude Include="header\database.hpp" />
     <ClInclude Include="header\menu.hpp" />
     <ClInclude Include="header\person.hpp" />
     <ClInclude Include="header\user.hpp" />
-    <ClInclude Include="header\verifydata.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
